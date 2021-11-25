@@ -8,11 +8,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { substationKpis } from './data';
+import { Button } from '@mui/material';
+import { generateSubstaionKpiExcelFile } from './excelGenerationService';
 
 const App = () => {
-
+  const generateExcel = ()=>{
+    generateSubstaionKpiExcelFile();
+  }
   return (
     <Box component="h2">
+      <Button variant="contained"
+      type="button"
+        onClick={generateExcel}
+      sx={{textTransform:"none", p:1, m:2}}>Export To Ecel</Button>
      <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
