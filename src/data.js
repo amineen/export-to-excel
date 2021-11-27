@@ -118,5 +118,25 @@ export const substationKpis = [
         uptime: 1670,
         availability: 0.7646520146520146,
         totalTime: 2184
+    },
+    {
+        loadFactor: 0.5678763440860215,
+        capacityFactor: 0.06814516129032258,
+        substationLoss: 0.08373493975903615,
+        saidi: 22713.962264150945,
+        saifi: 0.8301886792452831,
+        caidi: 27360,
+        quarter: "Q2 2020",
+        name: "Kakata Substation",
+        peakLoad: 1.2,
+        installedCapacity: 10,
+        energyReceived: 1660,
+        energyDelivered: 1521,
+        totalCustomersServed: 26500,
+        totalCustomersInterrupted: 22000,
+        durationOfInterruption: 456,
+        uptime: 1670,
+        availability: 0.7646520146520146,
+        totalTime: 2184
     }
 ];

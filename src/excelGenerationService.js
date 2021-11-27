@@ -2,7 +2,7 @@ import ExcelJS from "exceljs";
 import { substationKpis } from "./data";
 import saveAs from "file-saver";
 
-export const generateSubstaionKpiExcelFile = () => {
+export const generateSubstaionKpiExcelFile = async () => {
 
     const columnHeaders = [
         { key: 'name', heading: 'Name', width: "22" },
@@ -34,15 +34,11 @@ export const generateSubstaionKpiExcelFile = () => {
     });
     const lastRow = worksheet.lastRow.number;
     worksheet.getCell(`A${lastRow + 1}`).value = "TOTAL";
-    worksheet.getCell(`F${lastRow + 1}`).value = totalEnergyDelivered;
-    worksheet.getCell(`G${lastRow + 1}`).value = totalUptime;
-    worksheet.getCell(`I${lastRow + 1}`).value = totalInterruptionDuration;
+    worksheet.getCell(`F${lastRow + 1}`).value = {formula: `SUM(F3:F${lastRow})`, result:totalEnergyDelivered};
+    worksheet.getCell(`G${lastRow + 1}`).value = {formula: `SUM(G3:G${lastRow})`, result:totalUptime};
+    worksheet.getCell(`I${lastRow + 1}`).value = {formula: `SUM(I3:I${lastRow})`, result:totalInterruptionDuration};
     worksheet.getRow(lastRow + 1).font = { bold: true };
-    workbook.xlsx.writeBuffer().then(function (buffer) {
-        saveAs(
-            new Blob([buffer], { type: "application/octet-stream" }),
-            `Substation Kpi.xlsx`
-        );
-    });
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer], { type: "application/octet-stream" }),`Substation Kpi.xlsx`);
 
 }
